@@ -1,1 +1,1 @@
-# soduko
+# a Soduko game
