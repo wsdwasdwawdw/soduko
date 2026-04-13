@@ -6,7 +6,7 @@ body {
     font-family: Arial;
 }
 
-#board {
+.board {
     display: grid;
     grid-template-columns: repeat(9, 50px);
     grid-template-rows: repeat(9, 50px);
@@ -21,6 +21,7 @@ body {
     font-size: 20px;
     border: 1px solid #999;
     outline: none;
+    color: rgb(233, 202, 29);
 }
 
 /* Thick borders for 3x3 boxes */
@@ -45,17 +46,18 @@ body {
 
 .fixed {
     background-color: #ddd;
+    color: aqua;
     font-weight: bold;
 }
 
-.invalid {
-    background-color: #ffcccc;
+.cell.invalid {
+    background-color: #ca4d4d;
 }
 
 .box-light {
-    background-color: #e6d5d5;
+    background-color: #867878;
 }
 
 .box-dark {
-    background-color: #fff;
+    background-color: #413f3f;
 }
