@@ -182,4 +182,4 @@ function checkInput(row, col, value) {
         return "wrong";
     }
 }
-createBoard();
+//createBoard();

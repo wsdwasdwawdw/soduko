@@ -4,17 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sudoku</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Sudoku</h1>
 
-    <div class="board"></div>
+    <div class="mainMenu">
+        <h1 class="accent-text">SUDOKU <span>NA PAGOD</span></h1>
+        <h2>SYSTEM READY, SELECT DIFFICULTY</h2>
 
-    <button class="generate">New Game</button>
+        <div>
+            <button class="easy">Easy</button>
+            <button class="medium">Medium</button>
+            <button class="hard">Hard</button>
+        </div>
+
+        <button class="generate">INITIALIZE SEQUENCE</button>
+    </div>
+
+
+    <section class="hide">
+        <div class="board"></div>
+    </section>
+
+
+    <!-- <button class="generate">New Game</button> -->
 
     <script src="script.js"></script>
 </body>

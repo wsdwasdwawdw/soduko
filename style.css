@@ -1,9 +1,98 @@
+:root {
+    --bg-color: #06080F; /* Deep space black */
+    --surface-color: #111522; /* Dark grey-blue */
+    --surface-light: #1A2136;
+    --neon-cyan: #00F0FF;
+    --neon-purple: #B026FF;
+    --text-main: #E0E6ED;
+    --text-dim: #7A869A;
+    --border-thin: 1px solid rgba(0, 240, 255, 0.2);
+    --border-thick: 2px solid var(--neon-cyan);
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
 body {
+    color: var(--text-main);
+    font-family: 'Rajdhani', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+button{
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mainMenu{
+    height: fit-content;
+    width: 40%;
+    color: #000;
+    padding: 3rem;
+    border: 1px solid rgba(136, 192, 214, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 0 1000px 100px rgba(27, 227, 241, 0.9);
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: Arial;
+    gap: 20px;
+}
+.mainMenu h1 {
+    
+    font-family: monospace;
+    font-size: 60px;
+    font-family: 'Orbitron', sans-serif;
+}
+.mainMenu h1 span {
+    color: var(--neon-cyan);
+}
+.mainMenu h2 {
+    
+    font-family: monospace;
+    font-size: 22px;
+    font-weight: 100;
+    color: var(--text-dim);
+}
+.mainMenu div button {
+    letter-spacing: 1px;
+    background-color: transparent;
+    padding: 10px 20px;
+    border: 1px solid #4eb7be54;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text-dim);
+    transition: all 0.3s ease;
+}
+.mainMenu div button:hover{
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.mainMenu div button:focus{
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+.mainMenu .generate{
+    padding: 10px 40px;
+    font-size: 20px;
+    background-color: transparent;
+    color: var(--neon-purple);
+    border-color: var(--neon-purple);
+    border-radius: 5px;
+}
+.mainMenu .generate:hover{
+    color: #fff;
+    background-color: var(--neon-purple);
+    box-shadow: 0 0 10px var(--neon-purple);
 }
 
 .board {
@@ -60,4 +149,8 @@ body {
 
 .box-dark {
     background-color: #413f3f;
+}
+
+.hide{
+    display: none;
 }
