@@ -1,14 +1,16 @@
 const boardElement = document.querySelector(".board");
+const mainMenu = document.querySelector(".mainMenu");
+const gameGround = document.querySelector(".gameGround");
 let solution = generateFullBoard(); // full correct answer
+let difficulty = 40;
 let puzzle = removeNumbers(solution.map(r => [...r]));
+let number = 0;
 // Create grid
 function createBoard() {
     boardElement.innerHTML = "";
  
     for (let i = 0; i < 81; i++) {
-        const input = document.createElement("input");
-        input.type = "text";
-        input.maxLength = 1;
+        const input = document.createElement("div");
         input.classList.add("cell");
    
         let row = Math.floor(i / 9);
@@ -27,11 +29,16 @@ function createBoard() {
    
         boardElement.appendChild(input);
  
-        input.addEventListener("input", ()=>{
+        input.addEventListener("click", ()=>{
+            
             // Remove non-numeric characters immediately
-            input.value = input.value.replace(/[^1-9]/g, "");
-           
-            let value = parseInt(input.value);
+            if(input.innerHTML === number.toString() && !input.classList.contains("fixed"))
+                input.innerHTML = "";
+            else if (number >= '1' && number <= '9' && !input.classList.contains("fixed")) 
+                input.innerHTML = number;
+            
+
+            let value = parseInt(input.innerHTML);
  
             // If empty, clear formatting and exit
             if (isNaN(value)) {
@@ -59,11 +66,11 @@ function displayBoard(board) {
         let col = i % 9;
  
         if (board[row][col] !== 0) {
-            cell.value = board[row][col];
+            cell.innerHTML = board[row][col];
             cell.classList.add("fixed");
             cell.disabled = true;
         } else {
-            cell.value = "";
+            cell.innerHTML = "";
             cell.classList.remove("fixed");
             cell.disabled = false;
         }
@@ -146,35 +153,6 @@ function hasUniqueSolution(board) {
     return count === 1;
 }
  
-function removeNumbers(board, attempts = 40) {
-    while (attempts > 0) {
-        let row = Math.floor(Math.random() * 9);
-        let col = Math.floor(Math.random() * 9);
- 
-        if (board[row][col] !== 0) {
-            let backup = board[row][col];
-            board[row][col] = 0;
- 
-            let copy = board.map(r => [...r]);
- 
-            if (!hasUniqueSolution(copy)) {
-                board[row][col] = backup;
-                attempts--;
-            }
-        }
-    }
-    return board;
-}
- 
-function generateSudoku() {
-    let full = generateFullBoard();
-    return removeNumbers(full, 40);
-}
- 
-const generateBtn = document.querySelector(".generate");
-generateBtn.addEventListener("click", ()=>{
-    displayBoard(puzzle);
-});
 function checkInput(row, col, value) {
     if (value == solution[row][col]) {
         return "correct";
@@ -182,4 +160,77 @@ function checkInput(row, col, value) {
         return "wrong";
     }
 }
-//createBoard();
+
+function removeNumbers(board) {
+    let removed = 0;
+    let attempts = 0;
+    let maxAttempts = difficulty * 3;  // Try 3x the target
+    
+    while (removed < difficulty && attempts < maxAttempts) {
+        let row = Math.floor(Math.random() * 9);
+        let col = Math.floor(Math.random() * 9);
+        attempts++;
+ 
+        if (board[row][col] !== 0) {
+            board[row][col] = 0;
+            removed++;
+        }
+    }
+    return board;
+}
+
+ 
+function generateSudoku() {
+    solution = generateFullBoard();
+    return removeNumbers(solution.map(r => [...r]));
+}
+ 
+const difficultyButtons = document.querySelectorAll(".mainMenu div button");
+difficultyButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        difficultyButtons.forEach(btn => btn.classList.remove("highlight"));
+
+        button.classList.add("highlight");
+        
+        if (button.classList.contains("easy")) {
+            difficulty = 40;
+        } 
+        else if (button.classList.contains("medium")) {
+            difficulty = 50;
+        } 
+        else if (button.classList.contains("hard")) {
+            difficulty = 60;
+        }
+
+        console.log(difficulty);
+    });
+});
+
+const generateBtn = mainMenu.querySelector(".generate");
+generateBtn.addEventListener("click", ()=>{
+    mainMenu.classList.add("hide");
+    gameGround.classList.remove("hide");
+    createBoard();
+    puzzle = generateSudoku();
+    displayBoard(puzzle);
+});
+
+const numberButtons = document.querySelectorAll(".numbers div");
+numberButtons.forEach(button => {
+    button.addEventListener("click", () => { 
+        numberButtons.forEach(btn => btn.classList.remove("active"));
+        
+        button.classList.add("active");
+        number = button.innerHTML;
+        console.log(number);
+    } );
+
+});
+
+document.addEventListener("keydown", (event)=>{
+    if(event.key >= '1' && event.key <= '9') {
+        numberButtons.forEach(btn => btn.classList.remove("active"));
+        gameGround.querySelector(`.numbers .num-${event.key}`).classList.add("active");
+        number = event.key;
+    }
+})
