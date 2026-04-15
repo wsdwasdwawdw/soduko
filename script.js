@@ -53,6 +53,11 @@ function createBoard() {
             } else {
                 input.classList.add("invalid");
             }
+            
+            // Check if sudoku is complete
+            if (checkSudokuComplete()) {
+                alert("🎉 Congratulations! You solved the Sudoku!");
+            }
         });
     }
 }
@@ -161,6 +166,28 @@ function checkInput(row, col, value) {
     }
 }
 
+function checkSudokuComplete() {
+    const cells = document.querySelectorAll(".cell");
+    
+    for (let i = 0; i < 81; i++) {
+        let row = Math.floor(i / 9);
+        let col = i % 9;
+        let cellValue = parseInt(cells[i].innerHTML);
+        
+        // Check if cell is empty
+        if (isNaN(cellValue) || cellValue === 0) {
+            return false;
+        }
+        
+        // Check if cell matches solution
+        if (cellValue !== solution[row][col]) {
+            return false;
+        }
+    }
+    
+    return true;  // All cells filled and correct!
+}
+
 function removeNumbers(board) {
     let removed = 0;
     let attempts = 0;
@@ -228,9 +255,12 @@ numberButtons.forEach(button => {
 });
 
 document.addEventListener("keydown", (event)=>{
+    numberButtons.forEach(btn => btn.classList.remove("active"));
     if(event.key >= '1' && event.key <= '9') {
-        numberButtons.forEach(btn => btn.classList.remove("active"));
         gameGround.querySelector(`.numbers .num-${event.key}`).classList.add("active");
         number = event.key;
+    }
+    else{
+        number = 0;
     }
 })
