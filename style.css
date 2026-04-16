@@ -133,6 +133,7 @@ button{
     font-size: 24px;
     font-weight: 900;
     background-color: transparent;
+    box-shadow: 0 0 10px  #7a7a7a54;
     color: var(--neon-cyan);
     border: 1px solid #4eb7be54;
     border-radius: 5px;
@@ -191,4 +192,12 @@ button{
 
 .hide{
     display: none;
+}
+
+.highlight{
+    background-color: #30d6ff54;
+}
+
+.numberFixed{
+    pointer-events: none;
 }

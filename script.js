@@ -32,11 +32,15 @@ function createBoard() {
         input.addEventListener("click", ()=>{
             
             // Remove non-numeric characters immediately
-            if(input.innerHTML === number.toString() && !input.classList.contains("fixed"))
+            if(input.innerHTML === number.toString() && !input.classList.contains("fixed")){
                 input.innerHTML = "";
-            else if (number >= '1' && number <= '9' && !input.classList.contains("fixed")) 
+                input.classList.remove("highlight");
+                highlighter();
+            }
+            else if (number >= '1' && number <= '9' && !input.classList.contains("fixed")){ 
                 input.innerHTML = number;
-            
+                highlighter();
+            }
 
             let value = parseInt(input.innerHTML);
  
@@ -246,11 +250,13 @@ const numberButtons = document.querySelectorAll(".numbers div");
 numberButtons.forEach(button => {
     button.addEventListener("click", () => { 
         numberButtons.forEach(btn => btn.classList.remove("active"));
+
         
         button.classList.add("active");
         number = button.innerHTML;
         console.log(number);
-    } );
+        highlighter();
+    });
 
 });
 
@@ -263,4 +269,33 @@ document.addEventListener("keydown", (event)=>{
     else{
         number = 0;
     }
-})
+    highlighter();
+});
+
+function highlighter(){
+    const boxes = gameGround.querySelectorAll(".cell");
+    let counter = 0
+    boxes.forEach(box => {
+        box.classList.remove("highlight");
+
+        if(box.innerHTML === number.toString()){
+            box.classList.add("highlight");
+            counter++;
+
+        }
+        
+    });
+
+    if(counter === 9){
+        numberfixed();
+    }
+}
+
+function numberfixed(){
+    const boxes = gameGround.querySelectorAll(".cell");
+    boxes.forEach(box => {
+        if(box.classList.contains("highlight")){
+            box.classList.add("numberFixed");
+        }
+    });
+}
