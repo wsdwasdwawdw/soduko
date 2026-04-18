@@ -201,3 +201,10 @@ button{
 .numberFixed{
     pointer-events: none;
 }
+
+.numbers div.disabled{
+    pointer-events: none;
+    background-color: rgb(226, 226, 226);
+    color: #fff;
+    user-select: none;
+}

@@ -164,6 +164,7 @@ function hasUniqueSolution(board) {
  
 function checkInput(row, col, value) {
     if (value == solution[row][col]) {
+        highlighter();
         return "correct";
     } else {
         return "wrong";
@@ -251,10 +252,8 @@ numberButtons.forEach(button => {
     button.addEventListener("click", () => { 
         numberButtons.forEach(btn => btn.classList.remove("active"));
 
-        
         button.classList.add("active");
         number = button.innerHTML;
-        console.log(number);
         highlighter();
     });
 
@@ -262,7 +261,9 @@ numberButtons.forEach(button => {
 
 document.addEventListener("keydown", (event)=>{
     numberButtons.forEach(btn => btn.classList.remove("active"));
-    if(event.key >= '1' && event.key <= '9') {
+    let key = event.key;
+    const disabled = gameGround.querySelector(`.numbers .num-${key}`);
+    if(event.key >= '1' && event.key <= '9' && !(disabled.classList.contains("disabled"))) {
         gameGround.querySelector(`.numbers .num-${event.key}`).classList.add("active");
         number = event.key;
     }
@@ -275,27 +276,36 @@ document.addEventListener("keydown", (event)=>{
 function highlighter(){
     const boxes = gameGround.querySelectorAll(".cell");
     let counter = 0
+    let numberDone = 0;
     boxes.forEach(box => {
         box.classList.remove("highlight");
 
-        if(box.innerHTML === number.toString()){
+        if(box.innerHTML === number.toString() && !(box.classList.contains("invalid"))){
             box.classList.add("highlight");
             counter++;
-
+            numberDone = box.innerHTML;
         }
+
+        
         
     });
 
-    if(counter === 9){
-        numberfixed();
+    if(counter === 9 ){
+        console.log(numberDone);
+        numberfixed(numberDone);
     }
 }
 
-function numberfixed(){
+function numberfixed(numberDone){
     const boxes = gameGround.querySelectorAll(".cell");
+    const disabler = gameGround.querySelector(`.numbers .num-${numberDone}`);
     boxes.forEach(box => {
-        if(box.classList.contains("highlight")){
+        if(box.classList.contains("highlight") && !box.classList.contains("invalid")){
+            disabler.classList.add("disabled");
             box.classList.add("numberFixed");
         }
     });
+    disabler.classList.remove("active");
+
+    number = 0;
 }
