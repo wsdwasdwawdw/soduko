@@ -1,6 +1,8 @@
 const boardElement = document.querySelector(".board");
 const mainMenu = document.querySelector(".mainMenu");
 const gameGround = document.querySelector(".gameGround");
+const timer = gameGround.querySelector(".nav .timer");
+let seconds = 0;
 let solution = generateFullBoard(); // full correct answer
 let difficulty = 40;
 let puzzle = removeNumbers(solution.map(r => [...r]));
@@ -60,7 +62,9 @@ function createBoard() {
             
             // Check if sudoku is complete
             if (checkSudokuComplete()) {
-                alert("🎉 Congratulations! You solved the Sudoku!");
+                setTimeout(()=>{
+                    alert("🎉 Congratulations! You solved the Sudoku!");
+                }, 1000);
             }
         });
     }
@@ -245,6 +249,7 @@ generateBtn.addEventListener("click", ()=>{
     createBoard();
     puzzle = generateSudoku();
     displayBoard(puzzle);
+    timer();
 });
 
 const numberButtons = document.querySelectorAll(".numbers div");
@@ -308,4 +313,22 @@ function numberfixed(numberDone){
     disabler.classList.remove("active");
 
     number = 0;
+}
+
+//TIMER
+
+function timer(){
+    setInterval(() => {
+        seconds++;
+
+        let mins = Math.floor(seconds / 60);
+        let secs = seconds % 60;
+
+        // add leading zero (e.g. 01:05)
+        let formatted = 
+            String(mins).padStart(2, '0') + ":" + 
+            String(secs).padStart(2, '0');
+
+        timer.innerHTML = formatted;
+    }, 1000);
 }

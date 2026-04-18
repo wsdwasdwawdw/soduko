@@ -99,6 +99,19 @@ button{
     flex-direction: column;
     align-items: center;
 }
+
+.gameGround .nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    color: var(--neon-purple);
+    font-size: 32px;
+    font-weight: bolder;
+    border: solid 1px #000;
+    width: 100%;
+}
 .gameGround .board {
     font-family: 'Courier New', monospace;
     display: grid;
