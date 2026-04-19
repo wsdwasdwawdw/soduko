@@ -109,8 +109,11 @@ button{
     color: var(--neon-purple);
     font-size: 32px;
     font-weight: bolder;
-    border: solid 1px #000;
     width: 100%;
+}
+.gameGround .lives{
+    color: #e72d20;
+    font-size: 48px;
 }
 .gameGround .board {
     font-family: 'Courier New', monospace;

@@ -1,8 +1,9 @@
 const boardElement = document.querySelector(".board");
 const mainMenu = document.querySelector(".mainMenu");
 const gameGround = document.querySelector(".gameGround");
-const timer = gameGround.querySelector(".nav .timer");
 let seconds = 0;
+let life = 3;
+let pinakatimer = null;
 let solution = generateFullBoard(); // full correct answer
 let difficulty = 40;
 let puzzle = removeNumbers(solution.map(r => [...r]));
@@ -37,11 +38,9 @@ function createBoard() {
             if(input.innerHTML === number.toString() && !input.classList.contains("fixed")){
                 input.innerHTML = "";
                 input.classList.remove("highlight");
-                highlighter();
             }
             else if (number >= '1' && number <= '9' && !input.classList.contains("fixed")){ 
                 input.innerHTML = number;
-                highlighter();
             }
 
             let value = parseInt(input.innerHTML);
@@ -55,13 +54,18 @@ function createBoard() {
             // Validation Logic
             if (value === solution[row][col]) {
                 input.classList.remove("invalid");
-                // Optional: input.classList.add("correct");
             } else {
-                input.classList.add("invalid");
+                input.classList.add("invalid");   
+                console.log(life);
+                life--;
+                livesCounter();
             }
+
+            highlighter();
             
             // Check if sudoku is complete
             if (checkSudokuComplete()) {
+                stopTimer();
                 setTimeout(()=>{
                     alert("🎉 Congratulations! You solved the Sudoku!");
                 }, 1000);
@@ -88,6 +92,8 @@ function displayBoard(board) {
             cell.disabled = false;
         }
     });
+    timer();
+
 }
  
 function isValid(board, row, col, num) {
@@ -109,6 +115,7 @@ function isValid(board, row, col, num) {
 }
  
 function generateFullBoard() {
+    // Creating empty array
     const board = Array.from({ length: 9 }, () => Array(9).fill(0));
  
     function shuffle(nums) {
@@ -168,7 +175,6 @@ function hasUniqueSolution(board) {
  
 function checkInput(row, col, value) {
     if (value == solution[row][col]) {
-        highlighter();
         return "correct";
     } else {
         return "wrong";
@@ -235,7 +241,7 @@ difficultyButtons.forEach(button => {
             difficulty = 50;
         } 
         else if (button.classList.contains("hard")) {
-            difficulty = 60;
+            difficulty = 55;
         }
 
         console.log(difficulty);
@@ -249,7 +255,6 @@ generateBtn.addEventListener("click", ()=>{
     createBoard();
     puzzle = generateSudoku();
     displayBoard(puzzle);
-    timer();
 });
 
 const numberButtons = document.querySelectorAll(".numbers div");
@@ -290,9 +295,6 @@ function highlighter(){
             counter++;
             numberDone = box.innerHTML;
         }
-
-        
-        
     });
 
     if(counter === 9 ){
@@ -305,6 +307,11 @@ function numberfixed(numberDone){
     const boxes = gameGround.querySelectorAll(".cell");
     const disabler = gameGround.querySelector(`.numbers .num-${numberDone}`);
     boxes.forEach(box => {
+        if(box.classList.contains("invalid")){
+            box.innerHTML = "";
+            box.classList.remove("invalid")
+        }
+
         if(box.classList.contains("highlight") && !box.classList.contains("invalid")){
             disabler.classList.add("disabled");
             box.classList.add("numberFixed");
@@ -317,8 +324,9 @@ function numberfixed(numberDone){
 
 //TIMER
 
+const Timer = gameGround.querySelector(".nav .timer");
 function timer(){
-    setInterval(() => {
+    pinakatimer = setInterval(() => {
         seconds++;
 
         let mins = Math.floor(seconds / 60);
@@ -329,6 +337,40 @@ function timer(){
             String(mins).padStart(2, '0') + ":" + 
             String(secs).padStart(2, '0');
 
-        timer.innerHTML = formatted;
+        Timer.innerHTML = formatted;
     }, 1000);
+}
+
+function stopTimer(yas){
+
+    if(yas === "reset"){
+        seconds = 0;
+        Timer.innerHTML = "00:00";
+    }
+    clearInterval(pinakatimer);
+    pinakatimer = null;
+    
+}
+
+const back = gameGround.querySelector(".nav .back");
+back.addEventListener("click", () => {
+    stopTimer("reset");
+    mainMenu.classList.remove("hide");
+    gameGround.classList.add("hide");
+});
+
+const lives = gameGround.querySelector(".lives");
+function livesCounter(){
+    if(life === 3){
+        lives.innerHTML = "♥ ♥ ♥";
+    }
+    else if(life === 2){
+        lives.innerHTML = "♥ ♥";
+    }
+    else if(life === 1){
+        lives.innerHTML = "♥";
+    }
+    else{
+        alert("Game Over");
+    }
 }
