@@ -1,6 +1,12 @@
 const boardElement = document.querySelector(".board");
 const mainMenu = document.querySelector(".mainMenu");
 const gameGround = document.querySelector(".gameGround");
+const modals = document.querySelector(".modals");
+const pause = modals.querySelector(".menuPause");
+const WinLose = modals.querySelector(".manuShits");
+const numberButtons = document.querySelectorAll(".numbers div");
+const lives = gameGround.querySelector(".lives");
+let inGame = false
 let seconds = 0;
 let life = 3;
 let pinakatimer = null;
@@ -255,12 +261,13 @@ generateBtn.addEventListener("click", ()=>{
     createBoard();
     puzzle = generateSudoku();
     displayBoard(puzzle);
+    inGame = true;
 });
 
-const numberButtons = document.querySelectorAll(".numbers div");
+/* NUMBER BUTTON */
 numberButtons.forEach(button => {
     button.addEventListener("click", () => { 
-        numberButtons.forEach(btn => btn.classList.remove("active"));
+        removeHighlight(true);
 
         button.classList.add("active");
         number = button.innerHTML;
@@ -270,38 +277,24 @@ numberButtons.forEach(button => {
 });
 
 document.addEventListener("keydown", (event)=>{
-    numberButtons.forEach(btn => btn.classList.remove("active"));
+    removeHighlight(true);
     let key = event.key;
-    const disabled = gameGround.querySelector(`.numbers .num-${key}`);
-    if(event.key >= '1' && event.key <= '9' && !(disabled.classList.contains("disabled"))) {
+    if(event.key >= '1' && event.key <= '9' && !(gameGround.querySelector(`.numbers .num-${key}`).classList.contains("disabled"))) {
         gameGround.querySelector(`.numbers .num-${event.key}`).classList.add("active");
         number = event.key;
     }
+    else if(key.toLocaleLowerCase() == "escape" && inGame) {
+        number = event.key;
+        menuFunc();
+    }
     else{
         number = 0;
+        console.log(event.key);
     }
     highlighter();
 });
 
-function highlighter(){
-    const boxes = gameGround.querySelectorAll(".cell");
-    let counter = 0
-    let numberDone = 0;
-    boxes.forEach(box => {
-        box.classList.remove("highlight");
 
-        if(box.innerHTML === number.toString() && !(box.classList.contains("invalid"))){
-            box.classList.add("highlight");
-            counter++;
-            numberDone = box.innerHTML;
-        }
-    });
-
-    if(counter === 9 ){
-        console.log(numberDone);
-        numberfixed(numberDone);
-    }
-}
 
 function numberfixed(numberDone){
     const boxes = gameGround.querySelectorAll(".cell");
@@ -323,16 +316,16 @@ function numberfixed(numberDone){
 }
 
 //TIMER
-
 const Timer = gameGround.querySelector(".nav .timer");
 function timer(){
+    if (pinakatimer) return;
+
     pinakatimer = setInterval(() => {
         seconds++;
 
         let mins = Math.floor(seconds / 60);
         let secs = seconds % 60;
 
-        // add leading zero (e.g. 01:05)
         let formatted = 
             String(mins).padStart(2, '0') + ":" + 
             String(secs).padStart(2, '0');
@@ -346,20 +339,49 @@ function stopTimer(yas){
     if(yas === "reset"){
         seconds = 0;
         Timer.innerHTML = "00:00";
+        life = 3;
+        livesCounter();
+        removeHighlight(false);
     }
     clearInterval(pinakatimer);
     pinakatimer = null;
     
 }
 
-const back = gameGround.querySelector(".nav .back");
-back.addEventListener("click", () => {
-    stopTimer("reset");
-    mainMenu.classList.remove("hide");
-    gameGround.classList.add("hide");
+/* MENU MODALS */
+const menu = gameGround.querySelector(".nav .menu");
+menu.addEventListener("click", () => {
+    menuFunc();
+});
+function menuFunc(){
+    if(modals.classList.contains("hide")){
+        stopTimer();
+        modals.classList.toggle("hide");
+    }
+    else{
+        timer();
+        modals.classList.toggle("hide");
+    }
+}
+const newGame = modals.querySelectorAll("div .newGame");
+newGame.forEach(element => {
+    element.addEventListener("click", () => {
+        createBoard();
+        puzzle = generateSudoku();
+        stopTimer("reset")
+        displayBoard(puzzle);
+        modals.classList.toggle("hide");
+    });
 });
 
-const lives = gameGround.querySelector(".lives");
+const resume = modals.querySelectorAll("div .resume");
+resume.forEach(element => {
+    element.addEventListener("click", () => {
+        modals.classList.toggle("hide");
+        timer();
+    });
+});
+/* LIVE COUNTER */
 function livesCounter(){
     if(life === 3){
         lives.innerHTML = "♥ ♥ ♥";
@@ -373,4 +395,31 @@ function livesCounter(){
     else{
         alert("Game Over");
     }
+}
+
+/* HIGHLIGHTS */
+function highlighter(){
+    const boxes = gameGround.querySelectorAll(".cell");
+    let counter = 0
+    let numberDone = 0;
+    boxes.forEach(box => {
+        box.classList.remove("highlight");
+
+        if(box.innerHTML === number.toString() && !(box.classList.contains("invalid"))){
+            box.classList.add("highlight");
+            counter++;
+            numberDone = box.innerHTML;
+        }
+    });
+
+    if(counter === 9 ){
+        console.log(numberDone);
+        numberfixed(numberDone);
+    }
+}
+function removeHighlight(eto){
+    if(eto)
+        numberButtons.forEach(btn => btn.classList.remove("active"));
+    else
+        numberButtons.forEach(btn => btn.classList.remove("disabled"));
 }
