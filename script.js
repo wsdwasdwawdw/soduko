@@ -3,9 +3,10 @@ const mainMenu = document.querySelector(".mainMenu");
 const gameGround = document.querySelector(".gameGround");
 const modals = document.querySelector(".modals");
 const pause = modals.querySelector(".menuPause");
-const WinLose = modals.querySelector(".manuShits");
+const WinLose = modals.querySelector(".menuShit");
 const numberButtons = document.querySelectorAll(".numbers div");
 const lives = gameGround.querySelector(".lives");
+let finalTime = "";
 let inGame = false
 let seconds = 0;
 let life = 3;
@@ -73,7 +74,7 @@ function createBoard() {
             if (checkSudokuComplete()) {
                 stopTimer();
                 setTimeout(()=>{
-                    alert("🎉 Congratulations! You solved the Sudoku!");
+                    winlose(true);
                 }, 1000);
             }
         });
@@ -331,6 +332,8 @@ function timer(){
             String(secs).padStart(2, '0');
 
         Timer.innerHTML = formatted;
+
+        finalTime = formatted;
     }, 1000);
 }
 
@@ -357,10 +360,12 @@ function menuFunc(){
     if(modals.classList.contains("hide")){
         stopTimer();
         modals.classList.toggle("hide");
+        pause.classList.toggle("hide");
     }
     else{
         timer();
         modals.classList.toggle("hide");
+        pause.classList.toggle("hide");
     }
 }
 const newGame = modals.querySelectorAll("div .newGame");
@@ -371,6 +376,7 @@ newGame.forEach(element => {
         stopTimer("reset")
         displayBoard(puzzle);
         modals.classList.toggle("hide");
+        WinLose.classList.toggle("hide");
     });
 });
 
@@ -378,9 +384,18 @@ const resume = modals.querySelectorAll("div .resume");
 resume.forEach(element => {
     element.addEventListener("click", () => {
         modals.classList.toggle("hide");
+        pause.classList.toggle("hide");
         timer();
     });
 });
+
+const exit = modals.querySelectorAll("div .exit ");
+exit.forEach(element => {
+    element.addEventListener("click", ()=>{
+        location.reload();
+    });
+});
+
 /* LIVE COUNTER */
 function livesCounter(){
     if(life === 3){
@@ -393,8 +408,19 @@ function livesCounter(){
         lives.innerHTML = "♥";
     }
     else{
-        alert("Game Over");
+        //winlose(false);
     }
+}
+function winlose(victory){
+    modals.classList.toggle("hide");
+    WinLose.classList.toggle("hide");
+    if(victory){
+        WinLose.querySelector("h1").innerHTML = finalTime;
+    }
+    else{
+        WinLose.querySelector("h1").innerHTML = "Game Over";
+    }
+    removeHighlight(true);
 }
 
 /* HIGHLIGHTS */

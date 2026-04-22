@@ -114,15 +114,14 @@ button{
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    padding: 10px;
     color: var(--neon-purple);
     font-size: 32px;
     font-weight: bolder;
     width: 100%;
 }
 .gameGround .nav .menu{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
