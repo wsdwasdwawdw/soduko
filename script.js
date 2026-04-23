@@ -408,7 +408,7 @@ function livesCounter(){
         lives.innerHTML = "♥";
     }
     else{
-        //winlose(false);
+        winlose(false);
     }
 }
 function winlose(victory){
