@@ -399,7 +399,7 @@ exit.forEach(element => {
 /* LIVE COUNTER */
 function livesCounter(){
     if(life === 3){
-        lives.innerHTML = "♥ ♥";
+        lives.innerHTML = "♥ ♥ ♥";
     }
     else if(life === 2){
         lives.innerHTML = "♥ ♥";
