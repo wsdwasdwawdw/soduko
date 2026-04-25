@@ -399,7 +399,7 @@ exit.forEach(element => {
 /* LIVE COUNTER */
 function livesCounter(){
     if(life === 3){
-        lives.innerHTML = "♥ ♥ ♥";
+        lives.innerHTML = "♥ ♥";
     }
     else if(life === 2){
         lives.innerHTML = "♥ ♥";
@@ -421,6 +421,7 @@ function winlose(victory){
         WinLose.querySelector("h1").innerHTML = "Game Over";
     }
     removeHighlight(true);
+    stopTimer();
 }
 
 /* HIGHLIGHTS */
