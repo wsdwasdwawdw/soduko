@@ -302,3 +302,19 @@ button{
     color: #fff;
     user-select: none;
 }
+
+/* STYLES FOR NOTES */
+.board .grid{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, auto);
+}
+
+.board .grid .cellNotes{
+    font-size: 15px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

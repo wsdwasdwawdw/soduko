@@ -41,6 +41,12 @@ function createBoard() {
  
         input.addEventListener("click", ()=>{
             
+            if(input.classList.contains("grid")){
+                input.classList.remove("grid");
+                input.classList.add("cell");
+                input.innerHTML = "";
+
+            }
             // Remove non-numeric characters immediately
             if(input.innerHTML === number.toString() && !input.classList.contains("fixed")){
                 input.innerHTML = "";
@@ -100,7 +106,7 @@ function displayBoard(board) {
         }
     });
     timer();
-
+    notesGridCreation();
 }
  
 function isValid(board, row, col, num) {
@@ -449,4 +455,41 @@ function removeHighlight(eto){
         numberButtons.forEach(btn => btn.classList.remove("active"));
     else
         numberButtons.forEach(btn => btn.classList.remove("disabled"));
+}
+
+
+//FOR NOTES FUNCTIONS
+function notesGridCreation(){
+    const cell = gameGround.querySelectorAll(".cell");
+
+    cell.forEach(cell => {
+        cell.addEventListener("contextmenu", (e)=>{
+            e.preventDefault();
+
+            if(cell.classList.contains("grid")){
+                notesWrite();
+            }
+            else{
+                cell.innerHTML = "";
+                cell.classList.add("grid");
+                cell.classList.remove("cell");
+                
+                console.log("trying notes");
+
+                for(let i = 1; i <= 9; i++){
+                    const cellNotes = document.createElement("div");
+                    cellNotes.classList.add(`cellNotes`);
+                    cellNotes.classList.add(`num-${i}`);
+                    cell.appendChild(cellNotes);
+                }
+                notesWrite();
+            }
+        });
+    });
+    
+}
+
+function notesWrite(){
+    const notesCell = gameGround.querySelector(`.board .num-${number}`);
+    notesCell.innerHTML = number;
 }
