@@ -308,12 +308,17 @@ button{
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(3, auto);
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #9be9f8;
+    outline: #9be9f8;
+    box-sizing: border-box;
 }
 
 .board .grid .cellNotes{
     font-size: 15px;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
