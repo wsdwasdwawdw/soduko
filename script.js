@@ -25,7 +25,7 @@ function createBoard() {
    
         let row = Math.floor(i / 9);
         let col = i % 9;
-   
+
         // Determine 3x3 box
         let boxRow = Math.floor(row / 3);
         let boxCol = Math.floor(col / 3);
@@ -275,30 +275,32 @@ generateBtn.addEventListener("click", ()=>{
 numberButtons.forEach(button => {
     button.addEventListener("click", () => { 
         removeHighlight(true);
-
         button.classList.add("active");
         number = button.innerHTML;
         highlighter();
     });
-
 });
 
 document.addEventListener("keydown", (event)=>{
-    removeHighlight(true);
-    let key = event.key;
-    if(event.key >= '1' && event.key <= '9' && !(gameGround.querySelector(`.numbers .num-${key}`).classList.contains("disabled"))) {
-        gameGround.querySelector(`.numbers .num-${event.key}`).classList.add("active");
-        number = event.key;
+
+    if(inGame){
+        removeHighlight(true);
+        let key = event.key;
+        if(event.key >= '1' && event.key <= '9' && !(gameGround.querySelector(`.numbers .num-${key}`).classList.contains("disabled"))) {
+            gameGround.querySelector(`.numbers .num-${event.key}`).classList.add("active");
+            number = event.key;
+        }
+        else if(key.toLocaleLowerCase() == "escape" && inGame) {
+            number = event.key;
+            menuFunc();
+        }
+        else{
+            number = 0;
+            console.log(event.key);
+        }
+        highlighter();
     }
-    else if(key.toLocaleLowerCase() == "escape" && inGame) {
-        number = event.key;
-        menuFunc();
-    }
-    else{
-        number = 0;
-        console.log(event.key);
-    }
-    highlighter();
+    
 });
 
 
@@ -362,16 +364,17 @@ const menu = gameGround.querySelector(".nav .menu");
 menu.addEventListener("click", () => {
     menuFunc();
 });
+
 function menuFunc(){
     if(modals.classList.contains("hide")){
         stopTimer();
-        modals.classList.toggle("hide");
-        pause.classList.toggle("hide");
+        modals.classList.remove("hide");
+        pause.classList.remove("hide");
     }
     else{
         timer();
-        modals.classList.toggle("hide");
-        pause.classList.toggle("hide");
+        modals.classList.add("hide");
+        pause.classList.add("hide");
     }
 }
 const newGame = modals.querySelectorAll("div .newGame");
@@ -381,8 +384,8 @@ newGame.forEach(element => {
         puzzle = generateSudoku();
         stopTimer("reset")
         displayBoard(puzzle);
-        modals.classList.toggle("hide");
-        WinLose.classList.toggle("hide");
+        modals.classList.add("hide");
+        WinLose.classList.add("hide");
     });
 });
 
@@ -448,6 +451,7 @@ function highlighter(){
     if(counter === 9 ){
         console.log(numberDone);
         numberfixed(numberDone);
+        notesErase(numberDone);
     }
 }
 function removeHighlight(eto){
@@ -464,32 +468,47 @@ function notesGridCreation(){
 
     cell.forEach(cell => {
         cell.addEventListener("contextmenu", (e)=>{
-            e.preventDefault();
+            e.preventDefault(cell);
 
-            if(cell.classList.contains("grid")){
-                notesWrite();
-            }
-            else{
-                cell.innerHTML = "";
-                cell.classList.add("grid");
-                cell.classList.remove("cell");
-                
-                console.log("trying notes");
-
-                for(let i = 1; i <= 9; i++){
-                    const cellNotes = document.createElement("div");
-                    cellNotes.classList.add(`cellNotes`);
-                    cellNotes.classList.add(`num-${i}`);
-                    cell.appendChild(cellNotes);
+            if(number >= 1 && number <= 9 && !cell.classList.contains("fixed")){
+                if(cell.classList.contains("grid")){
+                    notesWrite(cell);
                 }
-                notesWrite();
+                else{
+                    cell.innerHTML = "";
+                    cell.classList.add("grid");
+                    cell.classList.remove("cell");
+                    
+                    console.log("trying notes");
+
+                    for(let i = 1; i <= 9; i++){
+                        const cellNotes = document.createElement("div");
+                        cellNotes.classList.add(`cellNotes`);
+                        cellNotes.classList.add(`num-${i}`);
+                        cell.appendChild(cellNotes);
+                    }
+                    notesWrite(cell);
+                }
             }
         });
     });
     
 }
 
-function notesWrite(){
-    const notesCell = gameGround.querySelector(`.board .num-${number}`);
-    notesCell.innerHTML = number;
+function notesWrite(cell){
+    const cellNote = cell.querySelector(`.num-${number}`);
+    
+    if(cellNote.innerHTML === number && number >= 1 && number <= 9){
+        cellNote.innerHTML = "";
+    }
+    else{
+        cellNote.innerHTML = number;
+    }
+}
+
+function notesErase(numberDone){
+    const grid = gameGround.querySelectorAll(`.board .grid .num-${numberDone}`);
+    grid.forEach(cells =>{
+        cells.innerHTML = "";
+    });
 }
