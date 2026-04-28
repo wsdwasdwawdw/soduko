@@ -109,6 +109,7 @@ button{
     box-shadow: 0 0 1000px 50px rgba(27, 227, 241, 0.9);
 }
 
+/* NAVIGATION */
 .gameGround .nav{
     display: flex;
     justify-content: space-between;
@@ -141,6 +142,8 @@ button{
     color: #e72d20;
     font-size: 48px;
 }
+
+/* BOARD */
 .gameGround .board {
     font-family: 'Courier New', monospace;
     display: grid;
@@ -169,6 +172,7 @@ button{
     justify-content: space-between;
     gap: 10px;
     margin-top: 20px;
+    box-sizing: border-box;
 }
 .gameGround .numbers div{
     padding: 10px 20px;
@@ -322,4 +326,41 @@ button{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+/* MEDIA QUERIES */
+
+@media (max-width: 768px) {
+    .gameGround{
+        width: 100%;
+        border: solid 1px yellow;
+    }
+    .gameGround .nav{
+        border: solid 1px yellow;
+    }
+    .gameGround .nav .menu{
+        height: 3vw;
+        width: 3vw;
+    }
+    .gameGround .nav .timer{
+        font-size: 3vw;
+    }
+    .gameGround .nav .settings{
+        font-size: 3vw;
+    }
+    .gameGround .lives{
+        font-size: 5vw;
+    }
+    .gameGround .board .cell{
+        height: 10vw;
+        width: 10vw;
+        font-size: 5vw;
+    }
+    .gameGround .numbers div{
+        padding: 2vw 3vw;
+        font-size: 2.5vw;
+        gap: 0;
+    }
+
 }
