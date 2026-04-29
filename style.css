@@ -49,7 +49,7 @@ button{
 .mainMenu h1 {
     text-align: center;
     font-family: monospace;
-    font-size: 60px;
+    font-size: 3vw;
     color: #fff;
     font-family: 'Orbitron', sans-serif;
 }
@@ -58,7 +58,7 @@ button{
 }
 .mainMenu h2 {
     font-family: monospace;
-    font-size: 22px;
+    font-size: 1.5vw;
     font-weight: 100;
     color: var(--text-dim);
 }
@@ -332,6 +332,13 @@ button{
 /* MEDIA QUERIES */
 
 @media (max-width: 768px) {
+    .mainMenu div{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1vw;
+    }
+
     .gameGround{
         width: 100%;
         border: solid 1px yellow;
