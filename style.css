@@ -340,11 +340,10 @@ button{
     }
 
     .gameGround{
+        height: 100%;
         width: 100%;
-        border: solid 1px yellow;
-    }
-    .gameGround .nav{
-        border: solid 1px yellow;
+        justify-content: center;
+        border-radius: 0;
     }
     .gameGround .nav .menu{
         height: 3vw;
@@ -363,6 +362,10 @@ button{
         height: 10vw;
         width: 10vw;
         font-size: 5vw;
+    }
+    .gameGround .numbers{
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .gameGround .numbers div{
         padding: 2vw 3vw;
