@@ -138,6 +138,18 @@ button{
     background-color: white;
     transition: all 0.3s ease;
 }
+.gameGround .nav .settings{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.6s ease;
+    line-height: 1;
+}
+.gameGround .nav .settings:hover{
+    transform: rotate(180deg);}
+
+/* LIVES */
 .gameGround .lives{
     color: #e72d20;
     font-size: 48px;
