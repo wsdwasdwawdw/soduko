@@ -62,13 +62,17 @@ button{
     font-weight: 100;
     color: var(--text-dim);
 }
+.mainMenu div{
+    display: flex;
+    gap: 1vw;
+}
 .mainMenu div button {
     letter-spacing: 1px;
     background-color: transparent;
-    padding: 10px 20px;
+    padding: 1vw 2vw;
     border: 1px solid #4eb7be54;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 2vw;
     color: var(--text-dim);
     transition: all 0.3s ease;
 }
@@ -85,8 +89,8 @@ button{
 }
 
 .mainMenu .generate{
-    padding: 10px 40px;
-    font-size: 20px;
+    padding: 1vw 2vw;
+    font-size: 2vw;
     background-color: transparent;
     color: var(--neon-purple);
     border-color: var(--neon-purple);
@@ -103,10 +107,12 @@ button{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
+    padding: 30px;
     background-color: #1f1f1f;
+    border: solid 1px yellow;
     border-radius: 50px;
     box-shadow: 0 0 1000px 50px rgba(27, 227, 241, 0.9);
+    box-sizing: border-box;
 }
 
 /* NAVIGATION */
@@ -145,6 +151,7 @@ button{
     cursor: pointer;
     transition: all 0.6s ease;
     line-height: 1;
+    font-size: 30px;
 }
 .gameGround .nav .settings:hover{
     transform: rotate(180deg);}
@@ -344,35 +351,54 @@ button{
 /* MEDIA QUERIES */
 
 @media (max-width: 768px) {
+    .mainMenu{
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+    }
+    .mainMenu h1{
+        font-size: 400%;
+    }
+    .mainMenu h2{
+        font-size: 300%;
+        text-align: center;
+    }
     .mainMenu div{
         width: 100%;
         display: flex;
         flex-direction: column;
         gap: 1vw;
     }
+    .mainMenu div button{
+        width: 100%;
+        padding: 2vw;
+        font-size: 150%;
+    }
+    .mainMenu .generate{
+        width: 100%;
+        padding: 2vw;
+        font-size: 200%;
+    }
 
+    /* GAMEGROUND STYLE */
     .gameGround{
         height: 100%;
         width: 100%;
         justify-content: center;
-        border-radius: 0;
+    }
+    .gameGround .nav{
+        border: solid 1px yellow;
     }
     .gameGround .nav .menu{
-        height: 3vw;
-        width: 3vw;
+        height: 100%;
+        gap: 5%;
     }
     .gameGround .nav .timer{
-        font-size: 3vw;
-    }
-    .gameGround .nav .settings{
-        font-size: 3vw;
-    }
-    .gameGround .lives{
-        font-size: 5vw;
+        font-size: 100%;
     }
     .gameGround .board .cell{
-        height: 10vw;
-        width: 10vw;
+        height: 9vw;
+        width: 9vw;
         font-size: 5vw;
     }
     .gameGround .numbers{
@@ -381,7 +407,7 @@ button{
     }
     .gameGround .numbers div{
         padding: 2vw 3vw;
-        font-size: 2.5vw;
+        font-size: 20px;
         gap: 0;
     }
 
