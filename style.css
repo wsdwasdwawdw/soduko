@@ -356,10 +356,10 @@ button{
         justify-content: center;
     }
     .mainMenu h1{
-        font-size: 400%;
+        font-size: 200%;
     }
     .mainMenu h2{
-        font-size: 300%;
+        font-size: 150%;
         text-align: center;
     }
     .mainMenu div{
@@ -371,12 +371,12 @@ button{
     .mainMenu div button{
         width: 100%;
         padding: 2vw;
-        font-size: 150%;
+        font-size: 100%;
     }
     .mainMenu .generate{
         width: 100%;
         padding: 2vw;
-        font-size: 200%;
+        font-size: 100%;
     }
 
     /* GAMEGROUND STYLE */
