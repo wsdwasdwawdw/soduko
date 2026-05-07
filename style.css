@@ -1,6 +1,8 @@
 :root {
-    --bg-color: #06080F; /* Deep space black */
-    --surface-color: #111522; /* Dark grey-blue */
+    --bg-color: #06080F;
+    /* Deep space black */
+    --surface-color: #111522;
+    /* Dark grey-blue */
     --surface-light: #1A2136;
     --neon-cyan: #00F0FF;
     --neon-purple: #B026FF;
@@ -9,13 +11,15 @@
     --border-thin: 1px solid rgba(0, 240, 255, 0.2);
     --border-thick: 2px solid var(--neon-cyan);
 }
-*{
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
 body {
+    padding: 5px;
     background-color: #030712;
     color: var(--text-main);
     font-family: 'Rajdhani', sans-serif;
@@ -25,13 +29,14 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-button{
+
+button {
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 /* MAINMENU SECTION*/
-.mainMenu{
+.mainMenu {
     height: fit-content;
     width: 40%;
     color: #000;
@@ -46,6 +51,7 @@ button{
     align-items: center;
     gap: 20px;
 }
+
 .mainMenu h1 {
     text-align: center;
     font-family: monospace;
@@ -53,19 +59,23 @@ button{
     color: #fff;
     font-family: 'Orbitron', sans-serif;
 }
+
 .mainMenu h1 span {
     color: var(--neon-cyan);
 }
+
 .mainMenu h2 {
     font-family: monospace;
     font-size: 1.5vw;
     font-weight: 100;
     color: var(--text-dim);
 }
-.mainMenu div{
+
+.mainMenu div {
     display: flex;
     gap: 1vw;
 }
+
 .mainMenu div button {
     letter-spacing: 1px;
     background-color: transparent;
@@ -76,19 +86,20 @@ button{
     color: var(--text-dim);
     transition: all 0.3s ease;
 }
-.mainMenu div button:hover{
+
+.mainMenu div button:hover {
     color: var(--neon-cyan);
     border-color: var(--neon-cyan);
     box-shadow: 0 0 10px var(--neon-cyan);
 }
 
-.mainMenu div button.highlight{
+.mainMenu div button.highlight {
     color: var(--neon-cyan);
     border-color: var(--neon-cyan);
     box-shadow: 0 0 10px var(--neon-cyan);
 }
 
-.mainMenu .generate{
+.mainMenu .generate {
     padding: 1vw 2vw;
     font-size: 2vw;
     background-color: transparent;
@@ -96,14 +107,15 @@ button{
     border-color: var(--neon-purple);
     border-radius: 5px;
 }
-.mainMenu .generate:hover{
+
+.mainMenu .generate:hover {
     color: #fff;
     background-color: var(--neon-purple);
     box-shadow: 0 0 10px var(--neon-purple);
 }
 
 /* GAME GROUND SECTION */
-.gameGround{
+.gameGround {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,7 +127,7 @@ button{
 }
 
 /* NAVIGATION */
-.gameGround .nav{
+.gameGround .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -125,7 +137,8 @@ button{
     font-weight: bolder;
     width: 100%;
 }
-.gameGround .nav .menu{
+
+.gameGround .nav .menu {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -133,17 +146,20 @@ button{
     flex-direction: column;
     justify-content: space-around;
 }
-.gameGround .nav .menu:hover div{
+
+.gameGround .nav .menu:hover div {
     background-color: #00d0f0;
 }
-.gameGround .nav .menu div{
+
+.gameGround .nav .menu div {
     width: 100%;
     height: 5px;
     border-radius: 10px;
     background-color: white;
     transition: all 0.3s ease;
 }
-.gameGround .nav .settings{
+
+.gameGround .nav .settings {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -152,11 +168,13 @@ button{
     line-height: 1;
     font-size: 30px;
 }
-.gameGround .nav .settings:hover{
-    transform: rotate(180deg);}
+
+.gameGround .nav .settings:hover {
+    transform: rotate(180deg);
+}
 
 /* LIVES */
-.gameGround .lives{
+.gameGround .lives {
     color: #e72d20;
     font-size: 48px;
 }
@@ -185,6 +203,7 @@ button{
     color: var(--neon-purple);
 
 }
+
 .gameGround .numbers {
     display: flex;
     justify-content: space-between;
@@ -192,12 +211,13 @@ button{
     margin-top: 20px;
     box-sizing: border-box;
 }
-.gameGround .numbers div{
+
+.gameGround .numbers div {
     padding: 10px 20px;
     font-size: 24px;
     font-weight: 900;
     background-color: transparent;
-    box-shadow: 0 0 10px  #7a7a7a54;
+    box-shadow: 0 0 10px #7a7a7a54;
     color: var(--neon-cyan);
     border: 1px solid #4eb7be54;
     border-radius: 5px;
@@ -210,6 +230,7 @@ button{
     border-color: var(--neon-cyan);
     box-shadow: 0 0 10px var(--neon-cyan);
 }
+
 .gameGround .numbers div.active {
     color: #fff;
     background-color: var(--neon-cyan);
@@ -238,7 +259,7 @@ button{
 }
 
 /* MODALS SECTION*/
-.modals{
+.modals {
     position: absolute;
     background: rgba(136, 192, 214, .3);
     width: 100%;
@@ -247,7 +268,8 @@ button{
     align-items: center;
     justify-content: center;
 }
-.modals div{
+
+.modals div {
     height: 500px;
     width: 500px;
     padding: 10px;
@@ -260,27 +282,32 @@ button{
     align-items: center;
     gap: 15px;
 }
-.modals div.hide{
+
+.modals div.hide {
     display: none;
 }
-.modals div h1{
+
+.modals div h1 {
     color: var(--neon-purple);
 }
-.modals div button{
+
+.modals div button {
     padding: 10px;
     width: 200px;
 }
+
 .modals div button {
     letter-spacing: 1px;
     background-color: transparent;
     padding: 10px 20px;
-    border: 1px solid var(--neon-cyan);    
+    border: 1px solid var(--neon-cyan);
     border-radius: 5px;
     font-size: 18px;
     color: var(--neon-cyan);
     transition: all 0.3s ease;
 }
-.modals div button:hover{
+
+.modals div button:hover {
     color: #fff;
     background-color: var(--neon-cyan);
     border-color: var(--neon-cyan);
@@ -306,19 +333,19 @@ button{
     background-color: #000000;
 }
 
-.hide{
+.hide {
     display: none;
 }
 
-.highlight{
+.highlight {
     background-color: #a1a1a1;
 }
 
-.numberFixed{
+.numberFixed {
     pointer-events: none;
 }
 
-.numbers div.disabled{
+.numbers div.disabled {
     pointer-events: none;
     background-color: rgb(226, 226, 226);
     color: #fff;
@@ -326,7 +353,7 @@ button{
 }
 
 /* STYLES FOR NOTES */
-.board .grid{
+.board .grid {
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(3, auto);
@@ -337,7 +364,7 @@ button{
     box-sizing: border-box;
 }
 
-.board .grid .cellNotes{
+.board .grid .cellNotes {
     font-size: 15px;
     width: 20px;
     height: 20px;
@@ -350,58 +377,68 @@ button{
 /* MEDIA QUERIES */
 
 @media (max-width: 768px) {
-    .mainMenu{
+    .mainMenu {
         height: 100%;
         width: 100%;
         justify-content: center;
     }
-    .mainMenu h1{
+
+    .mainMenu h1 {
         font-size: 200%;
     }
-    .mainMenu h2{
+
+    .mainMenu h2 {
         font-size: 150%;
         text-align: center;
     }
-    .mainMenu div{
+
+    .mainMenu div {
         width: 100%;
         display: flex;
         flex-direction: column;
         gap: 1vw;
     }
-    .mainMenu div button{
+
+    .mainMenu div button {
         width: 100%;
         padding: 2vw;
         font-size: 100%;
     }
-    .mainMenu .generate{
+
+    .mainMenu .generate {
         width: 100%;
         padding: 2vw;
         font-size: 100%;
     }
 
     /* GAMEGROUND STYLE */
-    .gameGround{
+    .gameGround {
         height: 100%;
         width: 100%;
         justify-content: center;
     }
-    .gameGround .nav .menu{
+
+    .gameGround .nav .menu {
         height: 100%;
         gap: 5%;
     }
-    .gameGround .nav .timer{
+
+    .gameGround .nav .timer {
         font-size: 100%;
     }
-    .gameGround .board .cell{
+
+    .gameGround .board .cell {
         height: 9vw;
         width: 9vw;
         font-size: 5vw;
     }
-    .gameGround .numbers{
+
+    .gameGround .numbers {
         flex-wrap: wrap;
         justify-content: center;
     }
-    .gameGround .numbers div{
+
+    .gameGround .numbers div {
         padding: 2vw 3vw;
         font-size: 20px;
         gap: 0;
