@@ -191,8 +191,8 @@ button {
 }
 
 .gameGround .board .cell {
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 7vh;
     display: flex;
     align-items: center;
     justify-content: center;
