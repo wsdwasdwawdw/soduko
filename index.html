@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="">
 
 
     <div class="mainMenu">
+        <div class="settings">⚙️</div>
         <h1 class="accent-text">SUDOKU <span>NA PAGOD</span></h1>
         <h2>SYSTEM READY, SELECT DIFFICULTY</h2>
 
@@ -70,7 +71,23 @@
         </div>
     </section>
 
+    <div class="theme-switcher">
+        <h1>Theme</h1>
+        <label for="themeSelect">Theme</label>
+        <select id="themeSelect">
+            <option value="default">Default</option>
+            <option value="sunset">Sunset</option>
+            <option value="forest">Forest</option>
+            <option value="plain">Plain</option>
+        </select>
+        <div>
+            <div class="sunset">
+                <p>Sunset</p>
+                <div class="theme-preview-sunset"></div>
+            </div>
+        </div>
 
+    </div>
 
     <script src="script.js"></script>
 </body>

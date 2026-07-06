@@ -1,5 +1,7 @@
 const boardElement = document.querySelector(".board");
 const mainMenu = document.querySelector(".mainMenu");
+const themeSelect = document.getElementById("themeSelect");
+
 const gameGround = document.querySelector(".gameGround");
 const modals = document.querySelector(".modals");
 const pause = modals.querySelector(".menuPause");
@@ -270,6 +272,21 @@ generateBtn.addEventListener("click", ()=>{
     displayBoard(puzzle);
     inGame = true;
 });
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("sudoku-theme", theme);
+}
+
+const savedTheme = localStorage.getItem("sudoku-theme") || "default";
+if (themeSelect) {
+    themeSelect.value = savedTheme;
+    applyTheme(savedTheme);
+
+    themeSelect.addEventListener("change", (event) => {
+        applyTheme(event.target.value);
+    });
+}
 
 /* NUMBER BUTTON */
 numberButtons.forEach(button => {
