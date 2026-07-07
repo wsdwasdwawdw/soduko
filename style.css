@@ -567,11 +567,37 @@ button {
 .theme-switcher {
     position: absolute;
     background-color: var(--theme-select-bg);
+    padding: 1rem;
     height: 100%;
-    width: 200px;
-    right: 0px;
+    width: 350px;
+    right: 0;
+    gap: 0.4rem;
+}
+.theme-switcher .theme-previews{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border: 1px solid yellow;
+}
+.theme-switcher .theme-previews div{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
+}
+.theme-switcher .theme-previews div div{
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+}
+.theme-switcher .theme-previews .theme-preview-default{
+    background: linear-gradient(90deg, #0f172a,#00F0FF, #B026FF);
+}
+.theme-switcher .theme-previews .theme-preview-sunset{
+    background: linear-gradient(90deg, #4f2a2d,#ff8c42, #ff4d6d);
+}
+.theme-switcher .theme-previews .theme-preview-forest{
+    background: linear-gradient(90deg, #1f3a2b,#6ee7b7, #4ade80);
+}
+.theme-switcher .theme-previews .theme-preview-plain{
+    background: linear-gradient(90deg, #ffffff,#00F0FF, #7A869A);
 }
