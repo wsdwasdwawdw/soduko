@@ -1,6 +1,8 @@
 const boardElement = document.querySelector(".board");
 const mainMenu = document.querySelector(".mainMenu");
 const themeSelect = document.getElementById("themeSelect");
+const settingsButton = document.querySelectorAll(".settings");
+const themeSwitcher = document.querySelector(".theme-switcher");
 
 const gameGround = document.querySelector(".gameGround");
 const modals = document.querySelector(".modals");
@@ -8,6 +10,7 @@ const pause = modals.querySelector(".menuPause");
 const WinLose = modals.querySelector(".menuShit");
 const numberButtons = document.querySelectorAll(".numbers div");
 const lives = gameGround.querySelector(".lives");
+
 let finalTime = "";
 let inGame = false
 let seconds = 0;
@@ -273,21 +276,6 @@ generateBtn.addEventListener("click", ()=>{
     inGame = true;
 });
 
-function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("sudoku-theme", theme);
-}
-
-const savedTheme = localStorage.getItem("sudoku-theme") || "default";
-if (themeSelect) {
-    themeSelect.value = savedTheme;
-    applyTheme(savedTheme);
-
-    themeSelect.addEventListener("change", (event) => {
-        applyTheme(event.target.value);
-    });
-}
-
 /* NUMBER BUTTON */
 numberButtons.forEach(button => {
     button.addEventListener("click", () => { 
@@ -529,3 +517,24 @@ function notesErase(numberDone){
         cells.innerHTML = "";
     });
 }
+/* THEME FUNCTIONS */
+function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("sudoku-theme", theme);
+}
+
+const savedTheme = localStorage.getItem("sudoku-theme") || "default";
+if (themeSelect) {
+    themeSelect.value = savedTheme;
+    applyTheme(savedTheme);
+
+    themeSelect.addEventListener("change", (event) => {
+        applyTheme(event.target.value);
+    });
+}
+
+settingsButton.forEach(settings => {
+    settings.addEventListener("click", () => {
+        themeSwitcher.classList.toggle("theme-switcher-hide");
+    })
+})
