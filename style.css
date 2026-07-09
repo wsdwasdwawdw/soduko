@@ -577,13 +577,19 @@ button {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    border: 1px solid yellow;
+    gap: 0.5rem;
 }
 .theme-switcher .theme-previews div{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2px;
+    cursor: pointer;
 }
+.theme-switcher .theme-previews > div:hover{
+    outline: 1px solid var(--table-text-1);
+}
+
 .theme-switcher .theme-previews div div{
     height: 40px;
     width: 100px;
